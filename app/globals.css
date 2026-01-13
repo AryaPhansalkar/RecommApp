@@ -24,3 +24,20 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.clipPath {
+  clip-path: path"
+    M 0 0
+    C 10% 10%, 10% 30%, 0% 40%
+    C 10% 50%, 10% 70%, 0% 80%
+    C 12% 88%, 12% 100%, 0% 100%
+    L 100% 100%
+    L 100% 0
+    Z
+  "
+}
+
+
+
+
+
