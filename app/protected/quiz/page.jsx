@@ -2,57 +2,51 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-const questions = [
-  {
-    id: 1,
-    question: "What sounds most fun right now?",
-    options: [
-      "Playing a fast-paced game",
-      "Watching an intense movie",
-      "Reading a good story",
-      "Just relaxing with casual content"
-    ]
-  },
-  {
-    id: 2,
-    question: "Pick a vibe you enjoy",
-    options: [
-      "Action & adrenaline",
-      "Mystery & suspense",
-      "Romance & emotions",
-      "Fantasy & world-building"
-    ]
-  },
-  {
-    id: 3,
-    question: "How do you usually spend free time?",
-    options: [
-      "Competing or gaming with friends",
-      "Binge watching shows",
-      "Reading or exploring stories",
-      "Scrolling / light entertainment"
-    ]
-  }
-];
+import { quizQuestions as questions } from "@/data/quizQuestions";
 
 export default function QuizPage() {
   const router = useRouter();
 
   const [started, setStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState([]);
+
+  // 🔥 This stores actual preference scores
+  const [scores, setScores] = useState({});
+
+  const submitQuiz = async (finalScores) => {
+    const response = await fetch("/api/quiz/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ scores: finalScores })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      router.push("/protected/dashboard");
+    } else {
+      alert("Failed to save quiz results");
+    }
+  };
 
   const handleOptionClick = (option) => {
-    const updatedAnswers = [...answers, option];
-    setAnswers(updatedAnswers);
+    const updatedScores = { ...scores };
+
+    // 🔥 Add option's score contribution
+    for (const key in option.scores) {
+      updatedScores[key] = (updatedScores[key] || 0) + option.scores[key];
+    }
+
+    setScores(updatedScores);
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      // last question → auto submit
-      console.log("Quiz answers:", updatedAnswers);
-      router.push("/protected/dashboard");
+      // ✅ Last question → submit to backend
+      console.log("Final Scores:", updatedScores);
+      submitQuiz(updatedScores);
     }
   };
 
@@ -94,7 +88,7 @@ export default function QuizPage() {
                 onClick={() => handleOptionClick(option)}
                 className="bg-white/20 hover:bg-white/30 text-left px-4 py-3 rounded-lg transition"
               >
-                {option}
+                {option.label}
               </button>
             ))}
           </div>

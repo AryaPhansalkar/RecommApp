@@ -2,51 +2,37 @@ import mongoose , {models} from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 const UserSchema = new mongoose.Schema({
-    username:{
-        type:String,
-        required:true,
-        minlength:5,
-        maxlength:50
-    },
-    email:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    password:{
-        type:String,
-        select:false,
-        required:true,
-        minlength:7
-    },
-    interesthobbies:{
-        Games:{
-            type:Number,
-            min:0,
-            max:100,
-            default:0
-        },
-        Movies:{
-            type:Number,
-            min:0,
-            max:100,
-            default:0
-        },
-        Books:{
-            type:Number,
-            min:0,
-            max:100,
-            default:0
-        }
-    },
-    interestGeneres:{
-        type:[String],
-        default:[]
-    },
-    dateCreated:{
-        type:Date,
-        default:Date.now
-    }
+  username: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 50
+  },
+
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+
+  password: {
+    type: String,
+    select: false,
+    required: true,
+    minlength: 7
+  },
+
+  // 🔥 MAIN RECOMMENDATION PROFILE
+  gamePreferences: {
+    type: Map,
+    of: Number,
+    default: {}
+  },
+
+  dateCreated: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 UserSchema.pre("save", async function () {
