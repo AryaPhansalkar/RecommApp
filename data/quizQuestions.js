@@ -3,7 +3,7 @@ export const quizQuestions = [
     id: 1,
     question: "When you try something new, you prefer:",
     options: [
-      { label: "Something simple and relaxing", scores: { "Casual": 20, "Turn-Based": 10 } },
+      { label: "Something simple and relaxing", scores: { "Simulation": 20, "Turn-Based": 10 } },
       { label: "Something exciting and fast", scores: { "Action": 20 } },
       { label: "Something deep I can learn over time", scores: { "Role-Playing": 15, "Strategy": 10 } },
       { label: "A good story I can get immersed in", scores: { "Adventure": 20, "Role-Playing": 10 } }
@@ -25,7 +25,7 @@ export const quizQuestions = [
     id: 3,
     question: "How stressful do you want your experience to be?",
     options: [
-      { label: "Not stressful at all", scores: { "Casual": 25, "Turn-Based": 10 } },
+      { label: "Not stressful at all", scores: { "Simulation": 25, "Turn-Based": 10 } },
       { label: "A little challenging but chill", scores: { "Adventure": 15, "Puzzle": 10 } },
       { label: "Intense and exciting", scores: { "Action": 25 } },
       { label: "Mentally demanding but not rushed", scores: { "Strategy": 25, "Turn-Based": 10 } }
@@ -39,7 +39,7 @@ export const quizQuestions = [
       { label: "Try again calmly", scores: { "Puzzle": 15, "Turn-Based": 10 } },
       { label: "Jump back in immediately", scores: { "Action": 25 } },
       { label: "Think and change my approach", scores: { "Strategy": 20, "Role-Playing": 10 } },
-      { label: "I don’t like failing much", scores: { "Casual": 25 } }
+      { label: "I don’t like failing much", scores: { "Simulation": 25 } }
     ]
   },
 
@@ -50,7 +50,7 @@ export const quizQuestions = [
       { label: "Story and characters", scores: { "Role-Playing": 20, "Adventure": 15 } },
       { label: "Gameplay and mechanics", scores: { "Action": 25 } },
       { label: "Feeling smart and clever", scores: { "Puzzle": 20, "Strategy": 10 } },
-      { label: "Just relaxing", scores: { "Casual": 25, "Simulation": 10 } }
+      { label: "Just relaxing", scores: { "Simulation": 25} }
     ]
   },
 
@@ -72,7 +72,7 @@ export const quizQuestions = [
       { label: "I hate being rushed", scores: { "Turn-Based": 20, "Strategy": 10 } },
       { label: "It’s okay sometimes", scores: { "Adventure": 10, "Role-Playing": 10 } },
       { label: "I love fast reactions", scores: { "Action": 25 } },
-      { label: "Depends on my mood", scores: { "Casual": 15 } }
+      { label: "Depends on my mood", scores: { "Simulation": 15 } }
     ]
   },
 
@@ -102,7 +102,7 @@ export const quizQuestions = [
     id: 10,
     question: "If something is very complex, you:",
     options: [
-      { label: "Avoid it", scores: { "Casual": 25 } },
+      { label: "Avoid it", scores: { "Simulation": 25 } },
       { label: "Try it if the story is good", scores: { "Role-Playing": 15, "Adventure": 10 } },
       { label: "Enjoy learning complex systems", scores: { "Strategy": 25, "Simulation": 10 } },
       { label: "Only if it’s fast and exciting", scores: { "Action": 25 } }
