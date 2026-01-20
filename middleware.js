@@ -1,21 +1,25 @@
 import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
 
 export function middleware(request) {
   const token = request.cookies.get("token")?.value;
+  const pathname = request.nextUrl.pathname;
 
-  if (!token) {
-    return NextResponse.redirect(new URL("/Signup", request.url));
+  // If NOT logged in and trying to access protected pages → go to Login
+  if (!token && pathname.startsWith("/protected")) {
+    return NextResponse.redirect(new URL("/Login", request.url));
   }
 
-  try {
-    jwt.verify(token, process.env.JWT_SECRET);
-    return NextResponse.next();
-  } catch (error) {
-    return NextResponse.redirect(new URL("/Signup", request.url));
+  // If logged in and trying to access public pages → go to dashboard
+  if (
+    token &&
+    (pathname === "/" || pathname === "/Login" || pathname === "/Signup")
+  ) {
+    return NextResponse.redirect(new URL("/protected/dashboard", request.url));
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/", "/Login", "/Signup", "/protected/:path*"],
 };
