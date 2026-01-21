@@ -2,8 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { genreMeta } from "@/data/genreMeta";
+import { useRouter } from "next/navigation";
+
 
 export default function DashboardPage() {
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [recommendations, setRecommendations] = useState([]);
@@ -12,7 +15,6 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const loadData = async () => {
-      // 1️⃣ Load user
       const res = await fetch("/api/user/me");
       const data = await res.json();
 
@@ -81,12 +83,30 @@ export default function DashboardPage() {
     .filter(([_, score]) => score === maxScore)
     .map(([genre]) => genre);
 
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", {
+      method: "POST"
+    });
+
+    router.push("/");
+  };
+
   return (
     <div className="min-h-screen bg-[#0f0c29] text-white p-10">
 
-      <h1 className="text-4xl font-bold mb-2">
-        Welcome back, {user.name} 👋
-      </h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-4xl font-bold">
+          Welcome back, {user.name} 👋
+        </h1>
+
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+        >
+          Logout
+        </button>
+      </div>
+
 
       <p className="text-gray-300 mb-8">
         Based on your quiz, your taste is mostly inclined towards:
