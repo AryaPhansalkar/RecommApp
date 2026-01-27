@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from 'zod';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
 const signupSchema = z.object({
@@ -28,12 +29,21 @@ const signupSchema = z.object({
   })
 })
 
-
 export default function Signup() {
   const router = useRouter();
   const { register, handleSubmit,formState:{errors} } = useForm({
     resolver:zodResolver(signupSchema)
   });
+  const images = ["/login1.jpg", "/login2.jpg", "/login3.jpg", "/login4.jpg"];
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 4000); // change every 4 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   const onSubmit = async(data) => {
     try {
@@ -61,78 +71,103 @@ export default function Signup() {
   }
   }
   return (
-  <div className="absolute min-h-screen w-full flex overflow-hidden">
-    {/* Left panel */}
-    <div className="min-h-screen w-1/3 flex-col bg-amber-300 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-center">Welcome to recomVerse</h1>
-      <p className="mt-4 text-center px-6 pt-2">Join us and explore personalized recommendations for books, movies, and games tailored just for you!</p>
-      <p className="mt-2 text-center px-6 pt-5">Already have an account? </p>
-      <button className="mt-2 bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded">
-        <Link href="/Login">Login</Link>
-      </button>
-    </div>
-
-    {/* Right panel - Form */}
-    <div className="relative min-h-screen w-2/3 flex flex-col items-center justify-center bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]">
-      <form 
-        onSubmit={handleSubmit(onSubmit)} 
-        className="bg-white p-10 rounded-lg shadow-lg w-1/2 flex flex-col gap-5"
-      >
-        <h2 className="text-2xl font-semibold text-center mb-5">Sign Up</h2>
-
-        {/* Name */}
-        <div className="flex flex-col">
-          <label className="mb-1 font-medium">Name</label>
-          <input
-            type="text"
-            {...register("username")}
-            className="border border-gray-300 rounded px-3 py-2"
-          />
-          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
-        </div>
-
-        {/* Email */}
-        <div className="flex flex-col">
-          <label className="mb-1 font-medium">Email</label>
-          <input
-            type="email"
-            {...register("email")}
-            className="border border-gray-300 rounded px-3 py-2"
-          />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-        </div>
-
-        {/* Password */}
-        <div className="flex flex-col">
-          <label className="mb-1 font-medium">Password</label>
-          <input
-            type="password"
-            {...register("password")}
-            className="border border-gray-300 rounded px-3 py-2"
-          />
-          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
-        </div>
-
-        {/* Confirm Password */}
-        <div className="flex flex-col">
-          <label className="mb-1 font-medium">Confirm Password</label>
-          <input
-            type="password"
-            {...register("confirmPassword")}
-            className="border border-gray-300 rounded px-3 py-2"
-          />
-          {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
-        </div>
-
-        <button 
-          type="submit" 
-          className="bg-amber-300 hover:bg-amber-400 text-white font-bold py-2 px-4 rounded mt-3"
-        >
-          Sign Up
-        </button>
-      </form>
-    </div>
+  <div className="min-h-screen w-full flex overflow-hidden bg-black">
+  
+  {/* LEFT IMAGE PANEL */}
+  <div className="w-1/2 h-screen relative hidden md:block">
+    {images.map((img, index) => (
+    <img
+      key={img}
+      src={img}
+      alt="Signup Art"
+      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-2000 ease-in-out ${
+        index === currentImage ? "opacity-100" : "opacity-0"
+      }`}
+    />
+  ))}
   </div>
+
+  {/* RIGHT FORM PANEL */}
+  <div className="w-full md:w-1/2 h-screen flex items-center justify-center bg-black text-white">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full max-w-md px-10 flex flex-col gap-8"
+    >
+      <h2 className="text-4xl font-semibold mb-6 text-center">Signup</h2>
+
+      {/* Username */}
+      <div className="flex flex-col gap-2">
+        <label className="text-sm text-gray-300">Username</label>
+        <input
+          type="text"
+          {...register("username")}
+          className="bg-transparent border-b-2 border-pink-500 focus:outline-none py-2 text-white"
+        />
+        {errors.username && (
+          <p className="text-red-400 text-sm">{errors.username.message}</p>
+        )}
+      </div>
+
+      {/* Email */}
+      <div className="flex flex-col gap-2">
+        <label className="text-sm text-gray-300">Email</label>
+        <input
+          type="email"
+          {...register("email")}
+          className="bg-transparent border-b-2 border-pink-500 focus:outline-none py-2 text-white"
+        />
+        {errors.email && (
+          <p className="text-red-400 text-sm">{errors.email.message}</p>
+        )}
+      </div>
+
+      {/* Password */}
+      <div className="flex flex-col gap-2">
+        <label className="text-sm text-gray-300">Password</label>
+        <input
+          type="password"
+          {...register("password")}
+          className="bg-transparent border-b-2 border-indigo-500 focus:outline-none py-2 text-white"
+        />
+        {errors.password && (
+          <p className="text-red-400 text-sm">{errors.password.message}</p>
+        )}
+      </div>
+
+      {/* Confirm Password */}
+      <div className="flex flex-col gap-2">
+        <label className="text-sm text-gray-300">Confirm Password</label>
+        <input
+          type="password"
+          {...register("confirmPassword")}
+          className="bg-transparent border-b-2 border-purple-500 focus:outline-none py-2 text-white"
+        />
+        {errors.confirmPassword && (
+          <p className="text-red-400 text-sm">
+            {errors.confirmPassword.message}
+          </p>
+        )}
+      </div>
+
+      <button
+        type="submit"
+        className="mt-6 py-3 rounded-md font-semibold bg-purple-700 hover:opacity-90 transition"
+      >
+        Sign Up
+      </button>
+      <div className="mt-6 text-center text-gray-400 text-sm">
+  Already have an account?
+  <br />
+  <Link
+    href="/Login"
+    className="text-blue-400 hover:text-blue-300 font-medium"
+  >
+    Login
+  </Link>
+</div>
+    </form>
+  </div>
+</div>
 
   );
 }
