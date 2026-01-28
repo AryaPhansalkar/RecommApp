@@ -92,86 +92,92 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0c29] text-white p-10">
+    <div className="min-h-screen bg-black text-white p-10">
 
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-4xl font-bold">
-          Welcome back, {user.name} 👋
-        </h1>
+  {/* Header */}
+  <div className="flex justify-between items-center mb-10">
+    <h1 className="text-4xl font-bold">
+      Welcome back,{" "}
+      <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+        {user.name}
+      </span>{" "}
+      👋
+    </h1>
 
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
-        >
-          Logout
-        </button>
-      </div>
+    <button
+      onClick={handleLogout}
+      className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:opacity-90 text-white px-5 py-2 rounded-lg font-semibold transition shadow-lg shadow-purple-500/30"
+    >
+      Logout
+    </button>
+  </div>
 
+  <p className="text-gray-400 mb-10">
+    Based on your quiz, your taste is mostly inclined towards:
+  </p>
 
-      <p className="text-gray-300 mb-8">
-        Based on your quiz, your taste is mostly inclined towards:
-      </p>
-
-      {/* Top Genre Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        {topGenres.map((genre) => (
-          <div
-            key={genre}
-            className="bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/10"
-          >
-            <h2 className="text-2xl font-semibold mb-2">
-              {genreMeta[genre]?.title || genre}
-            </h2>
-            <p className="text-gray-300">
-              {genreMeta[genre]?.description || "A genre you seem to enjoy."}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      {/* Recommendations */}
-      <h2 className="text-3xl font-semibold mb-6">
-        Recommended for you
-      </h2>
-
-      {recommendations.length === 0 ? (
+  {/* Top Genre Cards */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+    {topGenres.map((genre) => (
+      <div
+        key={genre}
+        className="bg-white/5 backdrop-blur-xl p-8 rounded-2xl border border-white/10 hover:border-purple-500/40 hover:shadow-lg hover:shadow-purple-500/20 transition"
+      >
+        <h2 className="text-2xl font-semibold mb-3 text-purple-300">
+          {genreMeta[genre]?.title || genre}
+        </h2>
         <p className="text-gray-400">
-          No recommendations found.
+          {genreMeta[genre]?.description || "A genre you seem to enjoy."}
         </p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {recommendations.map((game, index) => (
-            <div
-              key={index}
-              className="bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/10 flex flex-col"
-            >
-              <h3 className="text-lg font-semibold mb-3">
-                {game.title}
-              </h3>
+      </div>
+    ))}
+  </div>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {game.genres.map((g, i) => (
-                  <span
-                    key={i}
-                    className="text-xs bg-white/20 px-2 py-1 rounded-full"
-                  >
-                    {g}
-                  </span>
-                ))}
-              </div>
+  {/* Recommendations */}
+  <h2 className="text-3xl font-semibold mb-8">
+    <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+      Recommended for you
+    </span>
+  </h2>
 
-              <a
-                href={`https://www.google.com/search?q=${encodeURIComponent(game.title)}`}
-                target="_blank"
-                className="mt-auto bg-amber-400 hover:bg-amber-500 text-black font-semibold py-2 px-4 rounded-lg text-center"
+  {recommendations.length === 0 ? (
+    <p className="text-gray-500">
+      No recommendations found.
+    </p>
+  ) : (
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      {recommendations.map((game, index) => (
+        <div
+          key={index}
+          className="bg-white/5 backdrop-blur-xl p-6 rounded-2xl border border-white/10 hover:border-purple-500/40 hover:shadow-lg hover:shadow-purple-500/20 transition flex flex-col"
+        >
+          <h3 className="text-lg font-semibold mb-4 text-purple-200">
+            {game.title}
+          </h3>
+
+          <div className="flex flex-wrap gap-2 mb-6">
+            {game.genres.map((g, i) => (
+              <span
+                key={i}
+                className="text-xs bg-white/10 border border-white/10 px-3 py-1 rounded-full text-gray-300"
               >
-                Learn More
-              </a>
-            </div>
-          ))}
-        </div>
-      )}
+                {g}
+              </span>
+            ))}
+          </div>
 
+          <a
+            href={`https://www.google.com/search?q=${encodeURIComponent(game.title)}`}
+            target="_blank"
+            className="mt-auto bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:opacity-90 text-white font-semibold py-2 px-4 rounded-lg text-center transition shadow-md shadow-purple-500/30"
+          >
+            Learn More
+          </a>
+        </div>
+      ))}
     </div>
+  )}
+
+</div>
   );
 }

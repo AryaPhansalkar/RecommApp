@@ -50,7 +50,7 @@ export const quizQuestions = [
       { label: "Story and characters", scores: { "Role-Playing": 20, "Adventure": 15 } },
       { label: "Gameplay and mechanics", scores: { "Action": 25 } },
       { label: "Feeling smart and clever", scores: { "Puzzle": 20, "Strategy": 10 } },
-      { label: "Just relaxing", scores: { "Simulation": 25} }
+      { label: "Just relaxing", scores: { "Casual": 25} }
     ]
   },
 
@@ -72,7 +72,7 @@ export const quizQuestions = [
       { label: "I hate being rushed", scores: { "Turn-Based": 20, "Strategy": 10 } },
       { label: "It’s okay sometimes", scores: { "Adventure": 10, "Role-Playing": 10 } },
       { label: "I love fast reactions", scores: { "Action": 25 } },
-      { label: "Depends on my mood", scores: { "Simulation": 15 } }
+      { label: "Depends on my mood", scores: { "Casual": 15 } }
     ]
   },
 

@@ -6,91 +6,84 @@ import Navbar from '@/components/navbar.jsx';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white">
+   <div className="min-h-screen bg-black text-white">
       
       {/* Navbar */}
-      <Navbar/>
+      <Navbar />
 
-      {/* Hero Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between px-10 pt-20">
-        <div className="max-w-xl">
-          <h2 className="text-5xl font-extrabold leading-tight">
-            Discover Your Next <span className="text-purple-400">Favorite</span><br />
-            Book, Movie & Game
-          </h2>
-          <p className="mt-6 text-lg text-gray-300">
-            Discover yourself through understanding your interests — every book, every story, every game you love reveals a part of who you truly are.
-          </p>
+      {/* Main Section */}
+      <section className="flex flex-col items-center justify-center text-center px-6 pt-36">
+        
+        <h1 className="text-5xl md:text-6xl font-bold">
+          Find Your Next{" "}
+          <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(168,85,247,0.8)]">
+            Favorite Game
+          </span>
+        </h1>
 
-          <div className="mt-8 flex gap-4">
-            <button className="bg-purple-500 hover:bg-purple-600 px-6 py-3 rounded-xl font-semibold">
+        <p className="mt-6 text-lg text-gray-400 max-w-2xl">
+          RecomVerse is an AI-powered game recommendation platform that understands your taste and suggests games you’ll actually enjoy.
+        </p>
+
+        <div className="mt-10 flex gap-4">
+          <Link href="/Signup">
+            <button className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition shadow-lg shadow-purple-500/30">
               Get Started
             </button>
-            <button className="border border-purple-400 px-6 py-3 rounded-xl hover:bg-purple-500/20">
-              Learn More
-            </button>
-          </div>
-        </div>
+          </Link>
 
-        {/* Hero Image */}
-        <div className="mt-16 md:mt-0">
-          
+          <Link href="/Login">
+            <button className="border border-purple-500 text-purple-400 px-8 py-3 rounded-lg hover:bg-purple-500/10 transition">
+              Login
+            </button>
+          </Link>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="px-10 py-24">
-        <h3 className="text-4xl font-bold text-center mb-12">
-          Why Choose <span className="text-purple-400">RecomVerse?</span>
-        </h3>
+      {/* Features */}
+      <section className="px-10 py-28">
+        <h2 className="text-4xl font-bold text-center mb-16">
+          Why{" "}
+          <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+            RecomVerse?
+          </span>
+        </h2>
 
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {[
             {
-              title: "AI-Powered",
-              desc: "Advanced machine learning models personalize recommendations just for you."
+              title: "AI Powered",
+              desc: "Smart recommendations based on your real gaming preferences."
             },
             {
-              title: "Multi-Domain",
-              desc: "Books, movies, and video games — all in one powerful platform."
+              title: "Personalized",
+              desc: "Your feed evolves as your taste in games changes."
             },
             {
-              title: "Smart Tracking",
-              desc: "We adapt to your preferences as your taste evolves."
+              title: "No Random Noise",
+              desc: "Only games that actually match what you like."
             }
           ].map((item, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg hover:scale-105 transition"
+              className="bg-white/5 backdrop-blur-xl p-8 rounded-2xl border border-white/10 hover:border-purple-500/40 hover:shadow-lg hover:shadow-purple-500/20 transition duration-300"
             >
-              <h4 className="text-2xl font-semibold text-purple-300 mb-3">
+              <h3 className="text-2xl font-semibold text-purple-400 mb-3">
                 {item.title}
-              </h4>
-              <p className="text-gray-300">{item.desc}</p>
+              </h3>
+              <p className="text-gray-400">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Call To Action */}
-      <section className="text-center pb-24">
-        <h3 className="text-4xl font-bold mb-6">
-          Ready to Explore Smarter?
-        </h3>
-        <p className="text-gray-300 mb-8">
-          Join now and let our AI find your next obsession.
-        </p>
-        <button className="bg-purple-500 hover:bg-purple-600 px-10 py-4 rounded-xl font-bold text-lg">
-          Start Exploring
-        </button>
-      </section>
-
       {/* Footer */}
-      <footer className="border-t border-white/10 py-6 text-center text-gray-400">
-        © 2025 RecomVerse by Arya — All Rights Reserved ✨
+      <footer className="border-t border-white/10 py-6 text-center text-gray-500">
+        © 2025 RecomVerse by Arya — All Rights Reserved
       </footer>
 
     </div>
+
     
   );
 }

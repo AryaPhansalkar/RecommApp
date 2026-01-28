@@ -51,49 +51,57 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white">
+    <div className="min-h-screen flex items-center justify-center bg-black text-white">
 
-      {!started ? (
-        /* Intro Screen */
-        <div className="bg-white/10 backdrop-blur-lg p-10 rounded-xl w-[500px] shadow-lg text-center">
-          <h1 className="text-3xl font-bold mb-4">Quick Preference Quiz</h1>
+  {!started ? (
+    /* Intro Screen */
+    <div className="bg-white/5 backdrop-blur-xl p-10 rounded-2xl w-[500px] border border-white/10 shadow-lg shadow-purple-500/20 text-center">
+      
+      <h1 className="text-3xl font-bold mb-4">
+        <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+          Quick Preference Quiz
+        </span>
+      </h1>
 
-          <p className="text-gray-300 mb-6">
-            Answer a few questions so we can personalize your recommendations.
-            This will only take 2–3 minutes.
-          </p>
+      <p className="text-gray-400 mb-8">
+        Answer a few questions so we can personalize your recommendations.
+        This will only take 2–3 minutes.
+      </p>
 
-          <button
-            onClick={() => setStarted(true)}
-            className="bg-amber-400 hover:bg-amber-500 text-black font-semibold py-3 px-6 rounded-lg"
-          >
-            Start Quiz
-          </button>
-        </div>
-      ) : (
-        /* Quiz Screen */
-        <div className="bg-white/10 backdrop-blur-lg p-10 rounded-xl w-[500px] shadow-lg">
-          <p className="text-sm mb-2 text-gray-300">
-            Question {currentQuestion + 1} of {questions.length}
-          </p>
-
-          <h2 className="text-2xl font-semibold mb-6">
-            {questions[currentQuestion].question}
-          </h2>
-
-          <div className="flex flex-col gap-3">
-            {questions[currentQuestion].options.map((option, index) => (
-              <button
-                key={index}
-                onClick={() => handleOptionClick(option)}
-                className="bg-white/20 hover:bg-white/30 text-left px-4 py-3 rounded-lg transition"
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      <button
+        onClick={() => setStarted(true)}
+        className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:opacity-90 text-white font-semibold py-3 px-8 rounded-lg transition shadow-lg shadow-purple-500/30"
+      >
+        Start Quiz
+      </button>
     </div>
+  ) : (
+    /* Quiz Screen */
+    <div className="bg-white/5 backdrop-blur-xl p-10 rounded-2xl w-[500px] border border-white/10 shadow-lg shadow-purple-500/20">
+      
+      <p className="text-sm mb-2 text-gray-400">
+        Question {currentQuestion + 1} of {questions.length}
+      </p>
+
+      <h2 className="text-2xl font-semibold mb-8">
+        {questions[currentQuestion].question}
+      </h2>
+
+      <div className="flex flex-col gap-4">
+        {questions[currentQuestion].options.map((option, index) => (
+          <button
+            key={index}
+            onClick={() => handleOptionClick(option)}
+            className="bg-white/10 hover:bg-white/20 border border-white/10 hover:border-purple-500/40 text-left px-5 py-4 rounded-xl transition duration-200"
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+
+    </div>
+  )}
+
+</div>
   );
 }

@@ -34,6 +34,7 @@ export default function Signup() {
   const { register, handleSubmit,formState:{errors} } = useForm({
     resolver:zodResolver(signupSchema)
   });
+  
   const images = ["/login1.jpg", "/login2.jpg", "/login3.jpg", "/login4.jpg"];
   const [currentImage, setCurrentImage] = useState(0);
 
